@@ -1,0 +1,36 @@
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+  api_key: 75n3yf2gslo8yd
+  authorize: true
+  onLoad: onLinkedInLoad
+</script>
+<script>
+function onLinkedInLoad() {
+	console.log("Hello !");
+     IN.Event.on(IN, "auth", onLinkedInAuth);
+}
+
+function onLinkedInAuth() {
+	console.log("World!");
+     IN.API.Profile("me").result(displayProfiles);
+}
+function displayProfiles(profiles) {
+     member = profiles.values[0];
+     document.getElementById("profiles").innerHTML = 
+	     "<p id=\"" + member.id + "\">Hello " +  member.firstName + " " + member.lastName + "</p><img src=\"" + member.pictureUrl + "\"/>";
+window.MyLib = {}; // global Object container
+MyLib.value = 1;
+
+}
+function increment() {
+	window.MyLib.value += 1;
+	console.log(window.MyLib.value);
+}
+
+</script>
+<body>
+<div id="profiles"></div>
+<script type="in/Login">
+Hello, <?js= firstName ?> <?js= lastName ?>.
+ <button onclick="increment()">Click me</button> 
+</script>
+</body>
